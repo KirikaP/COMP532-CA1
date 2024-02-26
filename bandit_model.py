@@ -37,8 +37,6 @@ def draw_k_arm(k_reward_dist_mu, k_reward_dist_mu_sort):
     for i in range(10):
         ax.text(i + 1 + 0.2, mean[i] - 0.1, str(mean[i]))
 
-    ax.set_title('')
-
     ax = axes[1]
     ax.grid()
     ax.violinplot(k_reward_dist_mu_sort, showmeans=True)
