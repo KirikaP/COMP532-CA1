@@ -56,17 +56,18 @@ if __name__ == "__main__":
     num_arm = 10
     num_data = 2000
     np.random.seed(5)
+    # random arm's distribution
     k_reward_dist = np.random.randn(num_data, num_arm)
     print("raw mean=", np.round(np.mean(k_reward_dist, axis=0), 3))
     fig1, _ = draw_one_arm(k_reward_dist[:, 0])
-
+    # 10 arms' mu
     reward_mu = np.random.randn(num_arm)
     print("expected average return=", np.round(reward_mu, 3))
     fig2, _ = draw_mu(reward_mu)
-
+    # 10 arms' distribution in violin
     k_reward_dist_mu = reward_mu + k_reward_dist
     print("actual mean=", np.round(np.mean(k_reward_dist_mu, axis=0), 3))
-
+    # sort fig
     reward_mu_sort_arg = np.argsort(reward_mu)
     k_reward_dist_mu_sort = np.zeros_like(k_reward_dist_mu)
     for i in range(10):
