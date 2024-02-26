@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib as mpl
 
 
 def draw_one_arm(reward_dist):
