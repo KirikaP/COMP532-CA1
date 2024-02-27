@@ -52,7 +52,8 @@ if __name__ == "__main__":
 
     num_arm = 10
     num_data = 2000
-    np.random.seed(5)
+    # random seed, type a int value to fix results, or it'll be random
+    # np.random.seed(5)
     # random arm's distribution
     k_reward_dist = np.random.randn(num_data, num_arm)
     print("raw mean=", np.round(np.mean(k_reward_dist, axis=0), 3))
