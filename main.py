@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from bandit_algos.bandit_arm import BanditArm
+from k_arm_bandit import BanditArm
 from bandit_algos.ucb_bandit import UCBBandit
 
 # 初始化bandit的参数
