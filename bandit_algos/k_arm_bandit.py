@@ -9,7 +9,7 @@ class BanditMachine:
         self.counts = np.zeros(n_arms, dtype=int)  # 记录每个臂被拉动的次数
         self.values = np.zeros(n_arms)  # 记录每个臂的估计价值
         
-    def updata(self, arm, reward):
+    def update(self, arm, reward):
         """
         更新被拉动臂的信息
         :param arm: int, 臂的索引
@@ -18,7 +18,7 @@ class BanditMachine:
         self.counts[arm] += 1
         n = self.counts[arm]
         value = self.values[arm]
-        self.values[arm] = ((n - 1) / n) * value + (1 / n) * reward
+        self.values[arm] = ((n - 1) / n) * value + (1 / n) * reward # 增量更新估计价值
 
     def play(self, arm):
         """
@@ -32,5 +32,5 @@ class BanditMachine:
         # 生成指定臂的奖励
         reward = np.random.normal(self.miu_list[arm], self.sigma)
         # 更新被拉动臂的信息
-        self.update(self, arm, reward)
+        self.update(arm, reward)
         return reward
