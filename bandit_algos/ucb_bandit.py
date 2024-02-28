@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class UCBBandit:
     def __init__(self, arms, c):
         """
@@ -18,7 +19,7 @@ class UCBBandit:
         if self.total_counts < self.n_arms:
             # 如果有臂尚未被选择过，优先选择
             return np.argmin([arm.count for arm in self.arms])
-        
+
         # 选择ucb值最大的动作
         ucb_values = []
         for arm in self.arms:

@@ -10,7 +10,7 @@ sigma = 1  # 正态分布的标准差
 
 # 实例化bandit_arm
 bandits = [BanditArm(miu, sigma) for miu in miu_list]
-    
+
 # 初始化 UCB 算法
 c = 1.5
 ucb_bandit = UCBBandit(bandits, c)

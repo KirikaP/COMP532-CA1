@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class BanditArm:
     def __init__(self, miu, sigma):
         self.miu = miu  # 该臂的期望奖励
