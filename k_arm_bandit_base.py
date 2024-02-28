@@ -2,9 +2,13 @@ import numpy as np
 
 class BanditAlgorithm:
     def __init__(self, num_arms):
+    # Initialize the basic properties of the multi-armed bandit
         self.num_arms = num_arms
         self.arm_values = np.zeros(num_arms)
         self.arm_counts = np.zeros(num_arms)
+    # The number of arms of the multi-armed bandit machine
+    # The value estimate of each arm and the number of times each arm is selected are initialized
+    # They are represented by arm_values and arm_counts arrays, respectively
 
     def select_arm(self):
         raise NotImplementedError("select_arm method must be implemented")
