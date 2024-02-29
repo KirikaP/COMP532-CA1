@@ -1,29 +1,30 @@
 import numpy as np
 
 
+
 class UCBBandit:
-    def __init__(self, arms, c):
+    def __init__(self, machines, c):
         """
         :param arms: list, 每个元素是一个BanditArm对象
         :param c: float, 探索因子
         """
-        self.arms = arms
+        self.machines = machines
         self.c = c 
-        n_arms = len(arms)
-        self.n_arms = n_arms
-        self.counts = np.zeros(n_arms, dtype=int)  # 记录每个动作被选择的次数
-        self.values = np.zeros(n_arms, dtype=float)  # 记录每个动作的估计价值
+        self.arms = machines.miu_list # 赌博机的臂
+        self.n_arms = len(self.arms) # 臂数
+        self.counts = np.zeros(self.n_arms, dtype=int)  # 记录每个动作被选择的次数
+        self.values = np.zeros(self.n_arms, dtype=float)  # 记录每个动作的估计价值
         self.total_counts = 0 # 记录总共选择的次数
 
     def select_arm(self):
-        if self.total_counts < self.n_arms:
-            # 如果有臂尚未被选择过，优先选择
-            return np.argmin([arm.count for arm in self.arms])
-
+        # 如果有臂尚未被选择过，优先选择
+        for i in range(self.n_arms):
+            if self.counts[i] == 0:
+                return i
+        
+        
         # 选择ucb值最大的动作
-        ucb_values = []
-        for arm in self.arms:
-            ucb_values.append(arm.value + self.c * np.sqrt(np.log(self.total_counts) / (arm.count + 1e-5)))
+        ucb_values = self.values + self.c * np.sqrt(np.log(self.total_counts) / (self.counts + 1))
         return np.argmax(ucb_values)
 
     def update(self, chosen_arm, reward):
@@ -37,6 +38,6 @@ class UCBBandit:
     def play(self):
         # 选择动作，获得奖励，更新估计
         chosen_arm = self.select_arm()
-        reward = self.arms[chosen_arm].play()
+        reward = self.machines.play(chosen_arm)
         self.update(chosen_arm, reward)
         return chosen_arm, reward
