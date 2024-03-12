@@ -1,6 +1,6 @@
 import numpy as np
 
-class EpsilonGreedyBandit:
+class EpsilonGreedy:
     def __init__(self, machines, epsilon):
         """
         :param machines: BanditMachine, 多臂赌博机的实例
