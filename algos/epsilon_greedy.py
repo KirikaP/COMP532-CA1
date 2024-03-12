@@ -1,6 +1,6 @@
 import numpy as np
 
-class EpsilonGreedy:
+class EpsilonGreedyBandit:
     def __init__(self, machines, epsilon):
         """
         :param machines: BanditMachine, 多臂赌博机的实例
@@ -15,6 +15,11 @@ class EpsilonGreedy:
         self.total_counts = 0  # 记录总共选择的次数
 
     def select_arm(self):
+        # 先遍历一遍所有臂，如果有臂尚未被选择过，优先选择
+        for arm in range(self.n_arms):
+            if self.counts[arm] == 0:
+                return arm
+        
         # 以概率 epsilon 随机选择一个臂，以概率 1 - epsilon 选择当前估计价值最高的臂
         if np.random.rand() < self.epsilon:
             return np.random.randint(self.n_arms)
