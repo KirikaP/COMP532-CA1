@@ -2,7 +2,7 @@ import numpy as np
 
 
 
-class UCBBandit:
+class UCB:
     def __init__(self, machines, c):
         """
         :param arms: list, 每个元素是一个BanditArm对象
